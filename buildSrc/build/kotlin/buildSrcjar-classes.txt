@@ -1,0 +1,1 @@
+/Users/guilherme/AndroidStudioProjects/TakeHomeTest/buildSrc/build/classes/kotlin/main/Dep.class:/Users/guilherme/AndroidStudioProjects/TakeHomeTest/buildSrc/build/classes/kotlin/main/TestDep.class:/Users/guilherme/AndroidStudioProjects/TakeHomeTest/buildSrc/build/classes/kotlin/main/Versions.class
