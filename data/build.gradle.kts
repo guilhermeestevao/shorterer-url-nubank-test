@@ -35,7 +35,13 @@ android {
 dependencies {
 
     implementation(Dep.core)
+    implementation(project(mapOf("path" to ":domain")))
     testImplementation(TestDep.junit)
+    implementation(Dep.okhttp3)
+    implementation(Dep.retrofit)
+    implementation(Dep.moshiConverter)
+    implementation(Dep.moshi)
+    implementation(Dep.moshiKotlin)
     androidTestImplementation(TestDep.junitExt)
     androidTestImplementation(TestDep.expresso)
 

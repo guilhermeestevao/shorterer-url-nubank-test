@@ -1,10 +1,11 @@
-package test.example.takehome.data
+package test.example.data
 
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path
-import test.example.takehome.domain.AliasDto
-import test.example.takehome.domain.UrlDto
+import test.example.domain.AliasDto
+import test.example.domain.UrlDto
+
 
 interface AliasApi {
 
