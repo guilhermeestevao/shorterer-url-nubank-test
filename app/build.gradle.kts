@@ -1,24 +1,22 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id(Plugin.androidApp)
+    id(Plugin.kotlinAndroid)
     kotlin("kapt")
-    id("com.google.dagger.hilt.android")
+    id(Plugin.dsggerHilt)
 }
 
 android {
-    namespace = "test.example.takehome"
-    compileSdk = Versions.defaultCompileSdkVersion
+    namespace = Config.applicationId
+    compileSdk = Config.defaultCompileSdkVersion
 
     defaultConfig {
-        applicationId = "test.example.takehome"
-        minSdk = Versions.defaultMinSdkVersion
-        targetSdk = Versions.defaultTargetSdkVersion
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Config.applicationId
+        minSdk = Config.defaultMinSdkVersion
+        targetSdk = Config.defaultTargetSdkVersion
+        versionCode = Config.versionCode
+        versionName = Config.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Config.testRunner
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -34,17 +32,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = Versions.javaCompileVersion
-        targetCompatibility = Versions.javaCompileVersion
+        sourceCompatibility = Config.javaCompileVersion
+        targetCompatibility = Config.javaCompileVersion
     }
     kotlinOptions {
-        jvmTarget = Versions.jvmTarget
+        jvmTarget = Config.jvmTarget
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = Config.kotlinCompilerExtensionVersion
     }
     packaging {
         resources {
