@@ -36,6 +36,7 @@ dependencies {
 
     implementation(Dep.core)
     testImplementation(TestDep.junit)
+    implementation(Dep.coroutine)
     androidTestImplementation(TestDep.junitExt)
     androidTestImplementation(TestDep.expresso)
 

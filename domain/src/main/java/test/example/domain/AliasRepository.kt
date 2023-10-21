@@ -1,4 +1,4 @@
-package test.example.takehome.domain
+package test.example.domain
 
 import kotlinx.coroutines.flow.Flow
 

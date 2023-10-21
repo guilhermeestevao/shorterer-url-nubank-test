@@ -1,4 +1,4 @@
-package test.example.takehome.domain
+package test.example.domain
 
 data class UrlDto(val url: String)
 
