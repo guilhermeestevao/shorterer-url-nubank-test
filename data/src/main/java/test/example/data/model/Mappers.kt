@@ -1,8 +1,5 @@
-package test.example.data
+package test.example.data.model
 
-import test.example.data.model.AliasModel
-import test.example.data.model.LinksModel
-import test.example.data.model.UrlModel
 import test.example.domain.entity.Alias
 import test.example.domain.entity.Favorite
 import test.example.domain.entity.Urls

@@ -1,6 +1,8 @@
 plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
+    kotlin("kapt")
+    id(Plugin.dsggerHilt)
 }
 
 android {
@@ -43,6 +45,8 @@ dependencies {
     implementation(Dep.moshiConverter)
     implementation(Dep.moshi)
     implementation(Dep.moshiKotlin)
+    implementation(Dep.hilt)
+    kapt(Dep.hiltCompiler)
     androidTestImplementation(TestDep.junitExt)
     androidTestImplementation(TestDep.expresso)
 

@@ -5,14 +5,15 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import test.example.data.ShortererUrlService
-import test.example.data.toAlias
-import test.example.data.toFavorite
-import test.example.data.toUrlModel
+import test.example.data.model.toAlias
+import test.example.data.model.toFavorite
+import test.example.data.model.toUrlModel
 import test.example.domain.ShortenerUseCaseException
 import test.example.domain.entity.Alias
 import test.example.domain.entity.Favorite
+import javax.inject.Inject
 
-class ShortenerDataSourceImpl(
+class ShortenerDataSourceImpl @Inject constructor(
     private val service: ShortererUrlService
 ): ShortenerDataSource {
 
