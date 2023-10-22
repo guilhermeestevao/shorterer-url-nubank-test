@@ -1,7 +1,10 @@
-package test.example.domain
+package test.example.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import test.example.domain.AliasRepository
+import test.example.domain.ViewUseCaseContract
+import test.example.domain.entity.Favorite
 
 class FindByAliasUseCase(
     private val repository: AliasRepository,
@@ -13,7 +16,7 @@ class FindByAliasUseCase(
     ): ViewUseCaseContract.Request
 
     data class Response(
-        val urlDto: UrlDto
+        val favorite: Favorite
     ): ViewUseCaseContract.Response
 
     override fun process(request: Request): Flow<Response> =

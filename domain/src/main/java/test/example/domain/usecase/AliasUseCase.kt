@@ -1,4 +1,4 @@
-package test.example.domain
+package test.example.domain.usecase
 
 data class AliasUseCase(
     val shortenUrl: ShortenUrlUseCase,
