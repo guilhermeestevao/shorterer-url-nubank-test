@@ -1,6 +1,6 @@
 package test.example.domain.usecase
 
-data class AliasUseCase(
+data class UseCases(
     val shortenUrl: ShortenUrlUseCase,
     val findById: FindByAliasUseCase
 )

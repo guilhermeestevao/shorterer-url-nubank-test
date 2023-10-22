@@ -12,8 +12,6 @@ class ShortenUrlUseCase(
     configuration: Configuration
 ): ViewUseCaseContract<ShortenUrlUseCase.Request, ShortenUrlUseCase.Response>(configuration) {
 
-    operator fun invoke(favorite: Favorite) = process(Request(favorite))
-
     override fun process(request: Request): Flow<Response> =
         repository.shortenUrl(request.favorite)
             .map { Response(it) }

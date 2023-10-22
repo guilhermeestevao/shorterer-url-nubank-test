@@ -1,6 +1,8 @@
 plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
+    kotlin("kapt")
+    id(Plugin.dsggerHilt)
 }
 
 android {
@@ -34,7 +36,17 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
     implementation(Dep.core)
+    implementation(Dep.lifecycle)
+    implementation(Dep.activityCompose)
+    implementation(platform(Dep.composeBom))
+    implementation(Dep.composeUi)
+    implementation(Dep.composeUiGraphics)
+    implementation(Dep.composeUiToolingPreview)
+    implementation(Dep.composeMaterial)
+    implementation(Dep.hilt)
+    kapt(Dep.hiltCompiler)
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.junitExt)
     androidTestImplementation(TestDep.expresso)

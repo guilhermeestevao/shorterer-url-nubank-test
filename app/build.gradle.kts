@@ -58,6 +58,8 @@ kapt {
 dependencies {
 
     implementation(project(":domain"))
+    implementation(project(":presentation"))
+    implementation(project(":data"))
     implementation(Dep.core)
     implementation(Dep.lifecycle)
     implementation(Dep.activityCompose)
