@@ -32,8 +32,16 @@ android {
     kotlinOptions {
         jvmTarget = Config.jvmTarget
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Config.kotlinCompilerExtensionVersion
+    }
 }
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
 
     implementation(project(":domain"))
@@ -45,6 +53,7 @@ dependencies {
     implementation(Dep.composeUiGraphics)
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial)
+    implementation(Dep.composeViewModel)
     implementation(Dep.hilt)
     kapt(Dep.hiltCompiler)
     testImplementation(TestDep.junit)

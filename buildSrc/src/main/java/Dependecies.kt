@@ -19,6 +19,7 @@ object Dep {
     val activityCompose = "androidx.activity:activity-compose:$activityComposeVersion"
     val composeBom = "androidx.compose:compose-bom:$composeBomVersion"
     val composeUi = "androidx.compose.ui:ui"
+    val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose"
     val composeUiGraphics = "androidx.compose.ui:ui-graphics"
     val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
     val composeMaterial = "androidx.compose.material3:material3"

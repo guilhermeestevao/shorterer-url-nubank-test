@@ -8,10 +8,10 @@ import test.example.data.model.UrlModel
 
 interface ShortererUrlService {
 
-    @POST("/alias")
+    @POST("alias")
     suspend fun shortenUrl(@Body urlModel: UrlModel): AliasModel
 
-    @POST("/alias/{id}")
+    @POST("alias/{id}")
     suspend fun findUrlByAlias(@Path("id") id: String): UrlModel
 
 }

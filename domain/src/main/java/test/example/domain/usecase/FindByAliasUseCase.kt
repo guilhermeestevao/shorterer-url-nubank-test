@@ -7,7 +7,7 @@ import test.example.domain.ViewUseCaseContract
 import test.example.domain.entity.Favorite
 import javax.inject.Inject
 
-class FindByAliasUseCase @Inject constructor(
+class FindByAliasUseCase(
     private val repository: ShortenerUrlRepository,
     configuration: Configuration
 ): ViewUseCaseContract<FindByAliasUseCase.Request, FindByAliasUseCase.Response>(configuration) {

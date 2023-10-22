@@ -33,7 +33,9 @@ android {
         jvmTarget = Config.jvmTarget
     }
 }
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
 
     implementation(project(mapOf("path" to ":domain")))
