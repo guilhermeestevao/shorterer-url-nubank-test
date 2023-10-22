@@ -34,9 +34,8 @@ android {
 
 dependencies {
 
-    implementation(Dep.core)
-    testImplementation(TestDep.junit)
     implementation(Dep.coroutine)
+    testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.junitExt)
     androidTestImplementation(TestDep.expresso)
 

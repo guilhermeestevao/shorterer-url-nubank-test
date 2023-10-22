@@ -13,7 +13,7 @@ abstract class ViewUseCaseContract<S: ViewUseCaseContract.Request, T: ViewUseCas
     fun execute(request: S) = process(request)
         .map { Result.success(it) }
         .flowOn(configuration.dispatcher)
-        .catch { emit(Result.failure(AliasUseCaseException(it))) }
+        .catch { emit(Result.failure(ShortenerUseCaseException(it))) }
 
     interface Request
     interface Response

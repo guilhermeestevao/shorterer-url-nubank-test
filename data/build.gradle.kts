@@ -34,8 +34,9 @@ android {
 
 dependencies {
 
-    implementation(Dep.core)
     implementation(project(mapOf("path" to ":domain")))
+    implementation(Dep.core)
+    implementation(Dep.coroutine)
     testImplementation(TestDep.junit)
     implementation(Dep.okhttp3)
     implementation(Dep.retrofit)

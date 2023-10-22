@@ -1,5 +1,5 @@
 package test.example.domain
 
-data class AliasUseCaseException(
+data class ShortenerUseCaseException(
     override val cause: Throwable
 ): Throwable(cause)

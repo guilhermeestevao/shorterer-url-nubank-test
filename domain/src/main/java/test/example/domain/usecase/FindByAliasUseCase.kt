@@ -2,12 +2,12 @@ package test.example.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import test.example.domain.AliasRepository
+import test.example.domain.ShortenerUrlRepository
 import test.example.domain.ViewUseCaseContract
 import test.example.domain.entity.Favorite
 
 class FindByAliasUseCase(
-    private val repository: AliasRepository,
+    private val repository: ShortenerUrlRepository,
     configuration: Configuration
 ): ViewUseCaseContract<FindByAliasUseCase.Request, FindByAliasUseCase.Response>(configuration) {
 
