@@ -1,10 +1,10 @@
 package test.example.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import test.example.domain.entity.Favorite
@@ -14,9 +14,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ShortenerUrlViewModel @Inject constructor(
-    private val useCases: UseCases
+    private val useCases: UseCases,
+    private val converter: FavoritesConverter
 ): ViewModel() {
 
+    private val _uiState = MutableStateFlow<List<FavoriteModel>>(listOf())
+    val uiState = _uiState.asStateFlow()
 
     val list = MutableStateFlow(listOf<FavoriteItem>())
 
@@ -27,20 +30,18 @@ class ShortenerUrlViewModel @Inject constructor(
                 ShortenUrlUseCase.Request(
                     Favorite(url)
                 )
-            ).collect{
-                if(it.isSuccess) {
-                    it.onSuccess {
-                        val favorite =  FavoriteItem(it.alias.id, it.alias.urls.short)
-                        val newArrayList = ArrayList(list.value)
-                        newArrayList.add(favorite)
-                        list.value = newArrayList
-                    }
-                }
+            ).map {
+                converter.convert(it)
+            }.collect {
+
             }
+
         }
 
     }
 
 }
+
+
 
 typealias FavoriteItem = Pair<Long, String>

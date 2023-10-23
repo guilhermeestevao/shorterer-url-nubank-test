@@ -8,7 +8,7 @@ import test.example.data.ShortererUrlService
 import test.example.data.model.toAlias
 import test.example.data.model.toFavorite
 import test.example.data.model.toUrlModel
-import test.example.domain.ShortenerUseCaseException
+import test.example.domain.entity.ShortenerUseCaseException
 import test.example.domain.entity.Alias
 import test.example.domain.entity.Favorite
 import javax.inject.Inject

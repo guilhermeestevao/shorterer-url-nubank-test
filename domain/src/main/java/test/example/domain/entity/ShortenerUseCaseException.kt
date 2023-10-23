@@ -1,4 +1,4 @@
-package test.example.domain
+package test.example.domain.entity
 
 data class ShortenerUseCaseException(
     override val cause: Throwable
