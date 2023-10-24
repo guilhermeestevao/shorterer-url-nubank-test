@@ -1,5 +1,6 @@
 package test.example.presentation
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,13 +19,10 @@ class ShortenerUrlViewModel @Inject constructor(
     private val converter: FavoritesConverter
 ): ViewModel() {
 
-    private val _uiState = MutableStateFlow<List<FavoriteModel>>(listOf())
+    private val _uiState = MutableStateFlow<UiState<List<FavoriteModel>>>(UiState.Idle)
     val uiState = _uiState.asStateFlow()
 
-    val list = MutableStateFlow(listOf<FavoriteItem>())
-
     fun getShorterUrl(url: String) {
-
         viewModelScope.launch {
             useCases.shortenUrl.execute(
                 ShortenUrlUseCase.Request(
@@ -33,15 +31,11 @@ class ShortenerUrlViewModel @Inject constructor(
             ).map {
                 converter.convert(it)
             }.collect {
-
+                _uiState.value = _uiState.value.update(it)
             }
-
         }
 
     }
 
 }
 
-
-
-typealias FavoriteItem = Pair<Long, String>

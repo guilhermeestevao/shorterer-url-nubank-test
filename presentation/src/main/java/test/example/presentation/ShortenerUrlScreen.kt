@@ -25,46 +25,60 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun FavoriteScreen(
-    viewModel: ShortenerUrlViewModel = viewModel()
-) {
+fun FavoriteScreen() {
+    val viewModel = viewModel<ShortenerUrlViewModel>()
+    val state by viewModel.uiState.collectAsState()
+    Content(
+        action = viewModel::getShorterUrl,
+        state = state
+    ) {
+        FavoriteList(it)
+    }
+}
 
+@Composable
+fun <T: Any>Content(
+    state: UiState<T>,
+    action: (String) -> Unit,
+    child: @Composable (T) -> Unit
+) {
     Column(
         modifier = Modifier.padding(16.dp)
-    ) {
-        FavoriteForm(viewModel)
-        FavoriteList(viewModel)
-    }
+    ){
+        FavoriteForm(action)
+        when(state) {
+            is UiState.Success -> {
+                child(state.data)
+            }
+            is UiState.Error -> {
+                Error()
+            }
+            is UiState.Loading -> {
+                Loading()
+            }
+            is UiState.Idle -> {}
+        }
 
+    }
 }
 
 @Composable
 fun FavoriteList(
-    viewModel: ShortenerUrlViewModel
+    favorites: List<FavoriteModel>
 ) {
-
-    val favorites = viewModel.list.collectAsState()
-
-    favorites.value.let {
-        LazyColumn(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            items(it) { item ->
-                val (id, url) = item
-                Column{
-                    Text(text = id.toString())
-                    Text(text = url)
-                }
-            }
+    LazyColumn(
+        modifier = Modifier.padding(16.dp)
+    ) {
+        items(favorites) { favorite ->
+           FavoriteItem(favorite)
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteForm(
-    viewModel: ShortenerUrlViewModel
+    onAction: (String) -> Unit
 ) {
     var text by remember { mutableStateOf("") }
     Row(
@@ -72,10 +86,10 @@ fun FavoriteForm(
     ){
         OutlinedTextField(
             value = text,
-            onValueChange = {text = it}
+            onValueChange = { text = it }
         )
         IconButton(onClick = {
-            viewModel.getShorterUrl(text)
+            onAction(text)
             text = ""
         }) {
             Icon(
@@ -85,4 +99,22 @@ fun FavoriteForm(
             )
         }
     }
+}
+
+@Composable
+fun FavoriteItem(favorite: FavoriteModel) {
+    Column {
+        Text(text = favorite.id.toString())
+        Text(text = favorite.url)
+    }
+}
+
+@Composable
+fun Loading(){
+
+}
+
+@Composable
+fun Error() {
+
 }
