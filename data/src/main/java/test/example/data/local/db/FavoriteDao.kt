@@ -1,4 +1,4 @@
-package test.example.data.db
+package test.example.data.local.db
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -9,10 +9,9 @@ import androidx.room.Query
 interface FavoriteDao {
 
     @Query("SELECT * FROM favorites")
-    fun getFavorites(): List<FavoriteEntity>
+    suspend fun getFavorites(): List<FavoriteEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addFavorite(favoriteEntity: FavoriteEntity)
-
 
 }

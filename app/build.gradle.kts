@@ -36,6 +36,7 @@ android {
         targetCompatibility = Config.javaCompileVersion
     }
     kotlinOptions {
+
         jvmTarget = Config.jvmTarget
     }
     buildFeatures {
@@ -48,6 +49,14 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+
+    applicationVariants.all {
+        // Return compile configuration objects of a variant.
+        compileConfiguration.resolutionStrategy {
+            force("org.jetbrains:annotations:13.0")
+        }
+
     }
 }
 

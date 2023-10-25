@@ -5,8 +5,10 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import test.example.data.ShortenerUrlRepositoryImpl
-import test.example.data.source.remote.ShortenerDataSource
-import test.example.data.source.remote.ShortenerDataSourceImpl
+import test.example.data.source.local.LocalShotenerDataSource
+import test.example.data.source.local.LocalShotenerDataSourceImpl
+import test.example.data.source.remote.RemoteShortenerDataSource
+import test.example.data.source.remote.RemoteShortenerDataSourceImpl
 import test.example.domain.ShortenerUrlRepository
 
 @Module
@@ -14,9 +16,12 @@ import test.example.domain.ShortenerUrlRepository
 abstract class DataModule {
 
     @Binds
-    abstract fun bindRepository(repositoryImpl: ShortenerUrlRepositoryImpl): ShortenerUrlRepository
+    abstract fun bindRepository(repository: ShortenerUrlRepositoryImpl): ShortenerUrlRepository
 
     @Binds
-    abstract fun bindDataSource(sourceImpl: ShortenerDataSourceImpl): ShortenerDataSource
+    abstract fun bindRemoteDataSource(source: RemoteShortenerDataSourceImpl): RemoteShortenerDataSource
+
+    @Binds
+    abstract fun bindLocalDataSource(source: LocalShotenerDataSourceImpl): LocalShotenerDataSource
 
 }

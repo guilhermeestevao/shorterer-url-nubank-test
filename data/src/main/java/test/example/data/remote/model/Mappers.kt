@@ -1,11 +1,11 @@
-package test.example.data.model
+package test.example.data.remote.model
 
-import test.example.domain.entity.Alias
+import test.example.domain.entity.ShortenUrl
 import test.example.domain.entity.Favorite
 import test.example.domain.entity.Urls
 
-fun AliasModel.toAlias(): Alias =
-    Alias(
+fun AliasModel.toAlias(): ShortenUrl =
+    ShortenUrl(
         id = this.alias.toLong(),
         urls = this.links.toUrls()
     )

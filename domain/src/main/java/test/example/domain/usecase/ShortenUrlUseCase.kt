@@ -20,7 +20,7 @@ class ShortenUrlUseCase(
         val favorite: Favorite
     ): ViewUseCaseContract.Request
     data class Response(
-        val alias: Alias
+        val favorites: List<Alias>
     ): ViewUseCaseContract.Response
 
 }

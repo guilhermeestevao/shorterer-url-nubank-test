@@ -33,7 +33,7 @@ class ShortenerUrlViewModel @Inject constructor(
             ).map {
                 converter.convert(it)
             }.collect {
-                _uiState.value = _uiState.value.update(it)
+                _uiState.value = it
             }
         }
 

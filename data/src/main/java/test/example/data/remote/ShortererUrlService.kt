@@ -1,10 +1,10 @@
-package test.example.data
+package test.example.data.remote
 
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path
-import test.example.data.model.AliasModel
-import test.example.data.model.UrlModel
+import test.example.data.remote.model.AliasModel
+import test.example.data.remote.model.UrlModel
 
 interface ShortererUrlService {
 

@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import test.example.data.ShortererUrlService
+import test.example.data.remote.ShortererUrlService
 import java.util.concurrent.TimeUnit
 
 @Module

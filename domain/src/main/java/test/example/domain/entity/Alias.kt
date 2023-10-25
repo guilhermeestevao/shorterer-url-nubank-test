@@ -1,6 +1,6 @@
 package test.example.domain.entity
 
 data class Alias(
-    val id: Long,
-    val urls: Urls
+    val urlId: Long,
+    val url: String
 )

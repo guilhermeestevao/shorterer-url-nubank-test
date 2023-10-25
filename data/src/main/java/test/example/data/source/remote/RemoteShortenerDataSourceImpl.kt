@@ -4,21 +4,20 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import test.example.data.ShortererUrlService
-import test.example.data.model.toAlias
-import test.example.data.model.toFavorite
-import test.example.data.model.toUrlModel
-import test.example.data.source.remote.ShortenerDataSource
+import test.example.data.remote.ShortererUrlService
+import test.example.data.remote.model.toAlias
+import test.example.data.remote.model.toFavorite
+import test.example.data.remote.model.toUrlModel
 import test.example.domain.entity.ShortenerUseCaseException
-import test.example.domain.entity.Alias
+import test.example.domain.entity.ShortenUrl
 import test.example.domain.entity.Favorite
 import javax.inject.Inject
 
-class ShortenerDataSourceImpl @Inject constructor(
+class RemoteShortenerDataSourceImpl @Inject constructor(
     private val service: ShortererUrlService
-): ShortenerDataSource {
+): RemoteShortenerDataSource {
 
-    override fun shortenUrl(favorite: Favorite): Flow<Alias> = flow {
+    override fun shortenUrl(favorite: Favorite): Flow<ShortenUrl> = flow {
         emit(service.shortenUrl(favorite.toUrlModel()))
     }.map {
         it.toAlias()
