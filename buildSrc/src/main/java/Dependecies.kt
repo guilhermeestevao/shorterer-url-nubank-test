@@ -31,6 +31,9 @@ object Dep {
     val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     val hilt = "com.google.dagger:hilt-android:$hiltVersion"
     val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
+    val room = "androidx.room:room-runtime:${roomVersion}"
+    val rooKtx = "androidx.room:room-ktx:${roomVersion}"
+    val roomCompailer = "androidx.room:room-compiler:${roomVersion}"
 }
 
 object TestDep {
@@ -66,3 +69,4 @@ private const val hiltVersion = "2.44"
 private const val junitVersion = "4.13.2"
 private const val junitExtVersion = "1.1.5"
 private const val espressoVersion = "3.5.1"
+private const val roomVersion = "2.4.0"

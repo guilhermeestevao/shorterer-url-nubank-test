@@ -11,6 +11,6 @@ fun <T: Any> UiState<List<T>>.update(newItem: UiState<T>): UiState<List<T>> {
 fun <T: Any> UiState<List<T>>.update(newItem: T): UiState<List<T>> {
     return when(this) {
         is UiState.Success -> UiState.Success(data + newItem)
-        else -> this
+        else -> UiState.Success(listOf(newItem))
     }
 }

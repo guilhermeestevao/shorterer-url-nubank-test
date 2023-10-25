@@ -1,4 +1,4 @@
-package test.example.data.source
+package test.example.data.source.remote
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -8,6 +8,7 @@ import test.example.data.ShortererUrlService
 import test.example.data.model.toAlias
 import test.example.data.model.toFavorite
 import test.example.data.model.toUrlModel
+import test.example.data.source.remote.ShortenerDataSource
 import test.example.domain.entity.ShortenerUseCaseException
 import test.example.domain.entity.Alias
 import test.example.domain.entity.Favorite

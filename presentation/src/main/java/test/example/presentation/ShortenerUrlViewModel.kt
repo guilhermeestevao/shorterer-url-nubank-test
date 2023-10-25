@@ -20,9 +20,11 @@ class ShortenerUrlViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<FavoriteModel>>>(UiState.Idle)
+
     val uiState = _uiState.asStateFlow()
 
     fun getShorterUrl(url: String) {
+        _uiState.value = UiState.Loading
         viewModelScope.launch {
             useCases.shortenUrl.execute(
                 ShortenUrlUseCase.Request(

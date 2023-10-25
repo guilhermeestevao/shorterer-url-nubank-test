@@ -1,4 +1,4 @@
-package test.example.data.source
+package test.example.data.source.remote
 
 import kotlinx.coroutines.flow.Flow
 import test.example.domain.entity.Alias
