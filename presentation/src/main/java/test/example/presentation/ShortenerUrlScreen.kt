@@ -27,11 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun FavoriteScreen() {
-    val viewModel = viewModel<ShortenerUrlViewModel>()
-    val state by viewModel.uiState.collectAsState()
+fun FavoriteScreen(
+    state: UiState<List<FavoriteModel>>,
+    action: (String) -> Unit
+) {
     Content(
-        action = viewModel::getShorterUrl,
+        action = action,
         state = state
     ) {
         FavoriteList(it)
