@@ -59,7 +59,7 @@ fun <T: Any>Content(
             is UiState.Loading -> {
                 Loading()
             }
-            is UiState.Idle -> {}
+            else -> {}
         }
 
     }
