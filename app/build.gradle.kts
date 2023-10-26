@@ -51,13 +51,6 @@ android {
         }
     }
 
-    applicationVariants.all {
-        // Return compile configuration objects of a variant.
-        compileConfiguration.resolutionStrategy {
-            force("org.jetbrains:annotations:13.0")
-        }
-
-    }
 }
 
 kapt {
@@ -85,7 +78,6 @@ dependencies {
     implementation(Dep.coroutine)
     implementation(Dep.hilt)
     kapt(Dep.hiltCompiler)
-
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.junitExt)
     androidTestImplementation(TestDep.expresso)
