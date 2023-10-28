@@ -47,6 +47,7 @@ object TestDep {
     val composeUiTest = "androidx.compose.ui:ui-test-junit4"
     val composeUiTooling = "androidx.compose.ui:ui-tooling"
     val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest"
+    val mockito = "org.mockito.kotlin:mockito-kotlin:$mockitoVersion"
 }
 
 object Plugin {
@@ -76,3 +77,4 @@ private const val roomVersion = "2.5.0"
 private const val navigationVerson = "2.5.3"
 private const val hiltNavigationComposeVersion = "1.0.0"
 private const val navigation = "2.7.4"
+private const val mockitoVersion =  "4.0.0"
