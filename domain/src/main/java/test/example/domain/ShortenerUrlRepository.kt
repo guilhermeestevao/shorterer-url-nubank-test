@@ -6,5 +6,5 @@ import test.example.domain.entity.Favorite
 
 interface ShortenerUrlRepository {
     fun shortenUrl(favorite: Favorite): Flow<List<Alias>>
-    fun findUrlByAlias(id: String): Flow<Favorite>
+    fun findUrlByAlias(id: Long): Flow<Alias>
 }

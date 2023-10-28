@@ -1,4 +1,4 @@
-package test.example.presentation
+package test.example.presentation.home
 
 data class FavoriteModel(
     val id: Long,

@@ -1,4 +1,4 @@
-package test.example.presentation
+package test.example.presentation.common
 
 sealed class UiState<out T : Any> {
 

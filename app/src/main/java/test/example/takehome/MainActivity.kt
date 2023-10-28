@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -16,8 +14,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import test.example.presentation.FavoriteScreen
-import test.example.presentation.ShortenerUrlViewModel
+import test.example.presentation.favorite.FavoriteScreen
+import test.example.presentation.home.HomeScreen
 import test.example.takehome.ui.theme.TakeHomeTestTheme
 
 @AndroidEntryPoint
@@ -41,11 +39,26 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App(navController: NavHostController) {
-    val viewModel = hiltViewModel<ShortenerUrlViewModel>()
-    val state by viewModel.uiState.collectAsState()
+
     NavHost(navController, startDestination = Routes.Home.path) {
         composable(route = Routes.Home.path) {
-            FavoriteScreen(state, viewModel::getShorterUrl)
+            HomeScreen(hiltViewModel()) {
+                navController.navigate(Routes.Favorite.routeForFavorite(it))
+            }
+        }
+        composable(
+            route = Routes.Favorite.path,
+            arguments = Routes.Favorite.args
+        ) {
+            val id = Routes.Favorite.fromEntry(it)
+            FavoriteScreen(
+                id = id,
+                hiltViewModel()
+            )
         }
     }
+
 }
+
+
+

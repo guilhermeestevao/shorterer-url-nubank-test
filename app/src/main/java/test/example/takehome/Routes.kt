@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 
 private const val ROUTE_HOME= "home"
-private const val ROUTE_FAVORITE = "favorite"
+private const val ROUTE_FAVORITE = "favorite/%s"
 private const val ARG_FAVORITE_ID = "favoriteId"
 
 sealed class Routes(

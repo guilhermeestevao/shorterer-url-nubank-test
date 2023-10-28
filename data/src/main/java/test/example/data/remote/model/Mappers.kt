@@ -1,5 +1,6 @@
 package test.example.data.remote.model
 
+import test.example.domain.entity.Alias
 import test.example.domain.entity.ShortenUrl
 import test.example.domain.entity.Favorite
 import test.example.domain.entity.Urls
@@ -21,7 +22,8 @@ fun Favorite.toUrlModel(): UrlModel =
         url = this.url
     )
 
-fun UrlModel.toFavorite(): Favorite =
-    Favorite(
+fun UrlModel.toAlias(id: String): Alias =
+    Alias(
+        urlId = id.toLong(),
         url = this.url
     )

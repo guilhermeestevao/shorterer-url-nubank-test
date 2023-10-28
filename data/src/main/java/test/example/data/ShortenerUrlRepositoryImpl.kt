@@ -1,12 +1,8 @@
 package test.example.data
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.toList
 import test.example.data.source.local.LocalShotenerDataSource
 import test.example.data.source.remote.RemoteShortenerDataSource
 import test.example.domain.ShortenerUrlRepository
@@ -24,7 +20,7 @@ class ShortenerUrlRepositoryImpl @Inject constructor(
         emit(localSource.getFavorites())
     }
 
-    override fun findUrlByAlias(id: String): Flow<Favorite> =
-        remoteSource.findUrlByAlias(id)
+    override fun findUrlByAlias(id: Long): Flow<Alias> =
+        remoteSource.findUrlByAlias(id.toString())
 
 }

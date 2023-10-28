@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import test.example.data.remote.ShortererUrlService
 import test.example.data.remote.model.toAlias
-import test.example.data.remote.model.toFavorite
 import test.example.data.remote.model.toUrlModel
+import test.example.domain.entity.Alias
 import test.example.domain.entity.ShortenerUseCaseException
 import test.example.domain.entity.ShortenUrl
 import test.example.domain.entity.Favorite
@@ -25,10 +25,10 @@ class RemoteShortenerDataSourceImpl @Inject constructor(
         throw ShortenerUseCaseException(it)
     }
 
-    override fun findUrlByAlias(id: String): Flow<Favorite> = flow {
+    override fun findUrlByAlias(id: String): Flow<Alias> = flow {
         emit(service.findUrlByAlias(id))
     }.map {
-        it.toFavorite()
+        it.toAlias(id)
     }.catch {
         throw ShortenerUseCaseException(it)
     }

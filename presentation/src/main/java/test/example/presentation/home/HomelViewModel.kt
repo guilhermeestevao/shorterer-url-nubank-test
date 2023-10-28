@@ -1,4 +1,4 @@
-package test.example.presentation
+package test.example.presentation.home
 
 
 import androidx.lifecycle.ViewModel
@@ -11,10 +11,11 @@ import kotlinx.coroutines.launch
 import test.example.domain.entity.Favorite
 import test.example.domain.usecase.ShortenUrlUseCase
 import test.example.domain.usecase.UseCases
+import test.example.presentation.common.UiState
 import javax.inject.Inject
 
 @HiltViewModel
-class ShortenerUrlViewModel @Inject constructor(
+class HomelViewModel @Inject constructor(
     private val useCases: UseCases,
     private val converter: FavoritesConverter
 ): ViewModel() {
@@ -38,6 +39,8 @@ class ShortenerUrlViewModel @Inject constructor(
         }
 
     }
+
+
 
 }
 
