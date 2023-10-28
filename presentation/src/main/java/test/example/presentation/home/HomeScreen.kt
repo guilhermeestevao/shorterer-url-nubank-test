@@ -1,5 +1,6 @@
 package test.example.presentation.home
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,10 +16,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -32,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import test.example.presentation.common.ErrorDialog
 import test.example.presentation.common.UiState
@@ -62,9 +66,9 @@ fun HomeScreen(
 
 @Composable
 fun Content(
-    state: UiState<List<FavoriteModel>>,
+    state: UiState<List<String>>,
     action: (String) -> Unit,
-    success: @Composable (List<FavoriteModel>) -> Unit
+    success: @Composable (List<String>) -> Unit
 ) {
     Column(
         modifier = Modifier.padding(16.dp)
@@ -87,11 +91,11 @@ fun Content(
 
 @Composable
 fun FavoriteList(
-    favorites: List<FavoriteModel>
+    favorites: List<String>
 ) {
     LazyColumn(
-        modifier = Modifier.padding(16.dp)
-    ) {
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ){
         items(favorites) { favorite ->
            FavoriteItem(favorite)
         }
@@ -105,6 +109,7 @@ fun FavoriteForm(
 ) {
     var text by remember { mutableStateOf("") }
     Row(
+        modifier = Modifier.padding(vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ){
         OutlinedTextField(
@@ -125,10 +130,13 @@ fun FavoriteForm(
 }
 
 @Composable
-fun FavoriteItem(favorite: FavoriteModel) {
+fun FavoriteItem(favorite: String) {
     Column {
-        Text(text = favorite.id.toString())
-        Text(text = favorite.url)
+        Text(
+            text = favorite,
+            fontSize = 14.sp
+        )
+        Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
     }
 }
 

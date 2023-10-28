@@ -4,14 +4,9 @@ import test.example.domain.usecase.ShortenUrlUseCase
 import test.example.presentation.common.ResultConverter
 import javax.inject.Inject
 
-class FavoritesConverter @Inject constructor(): ResultConverter<ShortenUrlUseCase.Response, List<FavoriteModel>>() {
+class FavoritesConverter @Inject constructor(): ResultConverter<ShortenUrlUseCase.Response, List<String>>() {
 
     override fun convertSuccess(data: ShortenUrlUseCase.Response) =
-        data.favorites.map {
-            FavoriteModel(
-                id = it.urlId,
-                url = it.url
-            )
-        }
+        data.favorites.map {it.url}
 
 }

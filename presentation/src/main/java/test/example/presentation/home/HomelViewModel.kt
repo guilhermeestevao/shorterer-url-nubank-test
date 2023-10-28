@@ -20,7 +20,7 @@ class HomelViewModel @Inject constructor(
     private val converter: FavoritesConverter
 ): ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<FavoriteModel>>>(UiState.Idle)
+    private val _uiState = MutableStateFlow<UiState<List<String>>>(UiState.Idle)
 
     val uiState = _uiState.asStateFlow()
 
