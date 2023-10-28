@@ -53,7 +53,8 @@ dependencies {
     kapt(Dep.roomCompailer)
     implementation(Dep.hilt)
     kapt(Dep.hiltCompiler)
-    androidTestImplementation(TestDep.junitExt)
-    androidTestImplementation(TestDep.expresso)
+    testImplementation(TestDep.junit)
+    testImplementation(TestDep.mockito)
+    testImplementation(TestDep.coroutine)
 
 }
