@@ -1,40 +1,35 @@
 package test.example.presentation.home
 
-
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import test.example.domain.entity.Favorite
-import test.example.domain.entity.Result
-import test.example.domain.usecase.GetAllFavorites
 import test.example.domain.usecase.ShortenUrlUseCase
 import test.example.domain.usecase.UseCases
 import test.example.presentation.common.UiState
-import java.lang.Error
 import javax.inject.Inject
 
 @HiltViewModel
 class HomelViewModel @Inject constructor(
     private val useCases: UseCases,
-    private val converter: FavoritesConverter,
-    private val converter2: FavoriteConverter2
+    private val converter: FavoritesConverter
 ): ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<String>>>(UiState.Idle)
-    val uiState = _uiState.asStateFlow()
+    val favoriteList = mutableStateListOf<String>()
 
-    init {
-        getAllFavorites()
-    }
+    private val _error = MutableStateFlow<String?>(null)
+    val erroState = _error.asStateFlow()
+
+    private val _loading = MutableStateFlow(false)
+    val loadingState = _loading.asStateFlow()
 
     fun getShorterUrl(url: String) {
-        _uiState.value = UiState.Loading
+        _loading.value = true
         viewModelScope.launch {
             useCases.shortenUrl.execute(
                 ShortenUrlUseCase.Request(
@@ -42,24 +37,24 @@ class HomelViewModel @Inject constructor(
                 )
             ).map {
                 converter.convert(it)
-            }.collect {
-                _uiState.value = it
+            }.collect{
+                _loading.value = false
+                when(it){
+                    is UiState.Success -> {
+                        favoriteList.add(0, it.data)
+                    }
+                    is UiState.Error -> {
+                        _error.value = it.message
+                    }
+                    else -> {}
+                }
             }
         }
 
     }
 
-    private fun getAllFavorites(){
-        _uiState.value = UiState.Loading
-        viewModelScope.launch {
-            useCases.getAllFavorites.execute(
-                GetAllFavorites.Request
-            ).map {
-                converter2.convert(it)
-            }.collect{
-                _uiState.value = it
-            }
-        }
+    fun cleanErrorMessage() {
+        _error.value = null
     }
 
 }

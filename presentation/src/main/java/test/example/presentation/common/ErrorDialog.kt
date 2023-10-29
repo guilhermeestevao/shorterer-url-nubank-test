@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 
 @Composable
-fun ErrorDialog(error: String) {
-    Dialog(onDismissRequest = { }) {
+fun ErrorDialog(error: String, onClose: () -> Unit) {
+    Dialog(onDismissRequest = onClose) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()

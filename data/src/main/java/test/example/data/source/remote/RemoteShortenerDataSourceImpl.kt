@@ -17,7 +17,7 @@ class RemoteShortenerDataSourceImpl @Inject constructor(
     private val service: ShortererUrlService
 ): RemoteShortenerDataSource {
 
-    override fun shortenUrl(favorite: Favorite): Flow<ShortenUrl> = flow {
+    override fun shortenUrl(favorite: Favorite): Flow<Alias> = flow {
         emit(service.shortenUrl(favorite.toUrlModel()))
     }.map {
         it.toAlias()

@@ -5,17 +5,12 @@ import test.example.domain.entity.ShortenUrl
 import test.example.domain.entity.Favorite
 import test.example.domain.entity.Urls
 
-fun AliasModel.toAlias(): ShortenUrl =
-    ShortenUrl(
-        id = this.alias.toLong(),
-        urls = this.links.toUrls()
+fun AliasModel.toAlias(): Alias =
+    Alias(
+        urlId = this.alias.toLong(),
+        url = this.links.short
     )
 
-fun LinksModel.toUrls(): Urls =
-    Urls(
-        self = this.self,
-        short = this.short
-    )
 
 fun Favorite.toUrlModel(): UrlModel =
     UrlModel(

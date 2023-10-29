@@ -19,11 +19,10 @@ class FavoriteViewModel @Inject constructor(
     val converter: AliasConverter
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<Alias>>(UiState.Idle)
+    private val _uiState = MutableStateFlow<UiState<Alias>>(UiState.Loading)
     val uiState = _uiState.asStateFlow()
 
     fun findById(favoriteId: Long) {
-        _uiState.value = UiState.Loading
         viewModelScope.launch {
             useCases.findById.execute(
                 FindByAliasUseCase.Request(favoriteId)

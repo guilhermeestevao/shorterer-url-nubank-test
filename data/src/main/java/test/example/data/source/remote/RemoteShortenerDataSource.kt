@@ -6,6 +6,6 @@ import test.example.domain.entity.ShortenUrl
 import test.example.domain.entity.Favorite
 
 interface RemoteShortenerDataSource {
-    fun shortenUrl(favorite: Favorite): Flow<ShortenUrl>
+    fun shortenUrl(favorite: Favorite): Flow<Alias>
     fun findUrlByAlias(id: String): Flow<Alias>
 }

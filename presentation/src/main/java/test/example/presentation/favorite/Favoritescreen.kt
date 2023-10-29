@@ -46,7 +46,9 @@ fun Content(
             }
 
             is UiState.Error -> {
-                ErrorDialog(state.message)
+                ErrorDialog(state.message) {
+
+                }
             }
 
             else -> {
