@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import test.example.domain.usecase.FindByAliasUseCase
+import test.example.domain.usecase.GetAllFavorites
 import test.example.domain.usecase.ShortenUrlUseCase
 import test.example.domain.usecase.UseCases
 
@@ -23,7 +24,8 @@ class UseCaseModule {
     ): UseCases =
         UseCases(
             shortenUrl = ShortenUrlUseCase(repository, configuration),
-            findById = FindByAliasUseCase(repository, configuration)
+            findById = FindByAliasUseCase(repository, configuration),
+            getAllFavorites = GetAllFavorites(repository, configuration)
         )
 
 }
