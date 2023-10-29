@@ -57,6 +57,8 @@ dependencies {
     implementation(Dep.hilt)
     kapt(Dep.hiltCompiler)
     testImplementation(TestDep.junit)
+    testImplementation(TestDep.mockito)
+    testImplementation(TestDep.coroutine)
     androidTestImplementation(TestDep.junitExt)
     androidTestImplementation(TestDep.expresso)
 

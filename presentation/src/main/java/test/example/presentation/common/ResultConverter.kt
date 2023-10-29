@@ -1,9 +1,8 @@
 package test.example.presentation.common
 
-import test.example.domain.ViewUseCaseContract
 import test.example.domain.entity.Result
 
-abstract class ResultConverter<T : ViewUseCaseContract.Response, R : Any> {
+abstract class ResultConverter<T : Any, R : Any> {
 
     fun convert(result: Result<T>): UiState<R> {
         return when(result) {

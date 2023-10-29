@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import test.example.domain.ShortenerUrlRepository
@@ -24,5 +25,6 @@ class FindByAliasUseCaseTest {
         val response = useCase.process(request).first()
         assertEquals(FindByAliasUseCase.Response(alias), response)
     }
+
 
 }
