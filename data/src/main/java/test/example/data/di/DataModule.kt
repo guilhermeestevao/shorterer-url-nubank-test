@@ -5,6 +5,8 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import test.example.data.ShortenerUrlRepositoryImpl
+import test.example.data.remote.ErrorMessageProvider
+import test.example.data.remote.ErrorMessageProviderImpl
 import test.example.data.source.remote.RemoteShortenerDataSource
 import test.example.data.source.remote.RemoteShortenerDataSourceImpl
 import test.example.domain.ShortenerUrlRepository
@@ -19,4 +21,6 @@ abstract class DataModule {
     @Binds
     abstract fun bindRemoteDataSource(source: RemoteShortenerDataSourceImpl): RemoteShortenerDataSource
 
+    @Binds
+    abstract fun bindMenssagesProvider(provider: ErrorMessageProviderImpl): ErrorMessageProvider
 }

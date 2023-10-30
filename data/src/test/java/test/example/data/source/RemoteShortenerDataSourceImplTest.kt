@@ -24,7 +24,7 @@ import test.example.domain.entity.Urls
 class RemoteShortenerDataSourceImplTest {
 
     private val service = mock<ShortererUrlService>()
-    val source = RemoteShortenerDataSourceImpl(service)
+    val source = RemoteShortenerDataSourceImpl(service, mock())
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test

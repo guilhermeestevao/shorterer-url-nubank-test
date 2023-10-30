@@ -8,15 +8,14 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
-import test.example.data.source.local.LocalShotenerDataSource
 import test.example.data.source.remote.RemoteShortenerDataSource
 import test.example.domain.entity.Alias
+import test.example.domain.entity.Favorite
 
 class ShortenerUrlRepositoryImplTest {
 
-    private val localDataSource = mock<LocalShotenerDataSource>()
     private val remoteSource = mock<RemoteShortenerDataSource>()
-    private val repository = ShortenerUrlRepositoryImpl(remoteSource, localDataSource)
+    private val repository = ShortenerUrlRepositoryImpl(remoteSource)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
@@ -28,16 +27,15 @@ class ShortenerUrlRepositoryImplTest {
         assertEquals(alias, result)
     }
 
-/*    @OptIn(ExperimentalCoroutinesApi::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testShortenUrl() = runTest {
         val favorite = Favorite("google.com")
         val alias = Alias(1L, "google.com/1")
-        val list = listOf(alias)
-        whenever(repository.shortenUrl(favorite)).thenReturn(flowOf(list))
+        whenever(repository.shortenUrl(favorite)).thenReturn(flowOf(alias))
         val result = repository.shortenUrl(favorite).first()
-        Assert.assertEquals(list, result)
-        verify(localDataSource).addFavorite(alias)
-    }*/
+        assertEquals(alias, result)
+
+    }
 
 }

@@ -50,10 +50,6 @@ fun Content(
 
                 }
             }
-
-            else -> {
-1
-            }
         }
     }
 }
