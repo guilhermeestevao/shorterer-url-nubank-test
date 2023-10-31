@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="hint_url_text_field">http://</string>
+  <string name="hint_url_text_field">http://…</string>
   <string name="add_favorite_text_button">Add Favorite</string>
+  <string name="error_hint_message">Enter a valid url or alias id</string>
+  <string name="clear_icon_text">Clear</string>
 </resources>

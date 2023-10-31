@@ -12,8 +12,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -36,21 +43,20 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                         topBar = {
                             TopAppBar(
                                 title = {
-                                    Text(text = "Shortener URL")
-                                }
+                                    Text(text = stringResource(R.string.app_title))
+                                },
+                                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
                             )
                         }
                     ) { values ->
                         val navController = rememberNavController()
                         App(navController, values)
                     }
-
                 }
             }
         }
@@ -79,7 +85,9 @@ fun App(navController: NavHostController, values: PaddingValues) {
             FavoriteScreen(
                 id = id,
                 hiltViewModel()
-            )
+            ) {
+                navController.navigateUp()
+            }
         }
     }
 

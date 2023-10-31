@@ -1,5 +1,6 @@
 package test.example.presentation.home
 
+import android.util.Patterns
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,14 +8,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -44,10 +48,11 @@ fun HomeScreen(
     val favoriteList = viewModel.favoriteList.toList()
     val errorState = viewModel.erroState.collectAsState()
     val loadingState = viewModel.loadingState.collectAsState()
-    val action = {str: String ->
+
+    val onSubmit = { str: String ->
         str.toLongOrNull()?.let { id ->
             findById(id)
-        }?: run {
+        } ?: run {
             viewModel.getShorterUrl(str)
         }
     }
@@ -58,7 +63,7 @@ fun HomeScreen(
         errorMessage = errorState
     ) {
         val isLoading =loadingState.value
-        FavoriteForm(isLoading, action)
+        FavoriteForm(isLoading, onSubmit)
         Loading(isLoading)
         FavoriteList(it)
     }
@@ -81,8 +86,6 @@ fun Content(
     }
 }
 
-
-
 @Composable
 fun FavoriteList(
     favorites: List<String>
@@ -101,9 +104,18 @@ fun FavoriteList(
 @Composable
 fun FavoriteForm(
     isLoading: Boolean,
-    onAction: (String) -> Unit
+    onAction: (String) -> Unit,
 ) {
     var urlTextLink by remember { mutableStateOf("") }
+    var isValid by remember { mutableStateOf(false) }
+
+    val submitAction = {
+        isValid = (Patterns.WEB_URL.matcher(urlTextLink).matches().or(urlTextLink.toULongOrNull() != null)).not()
+        if(!isValid) {
+            onAction(urlTextLink)
+            urlTextLink = ""
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -119,17 +131,39 @@ fun FavoriteForm(
                 Text(text = stringResource(R.string.hint_url_text_field))
             },
             maxLines = 1,
-            onValueChange = { urlTextLink = it },
+            onValueChange = {
+                urlTextLink = it
+            },
             keyboardOptions = KeyboardOptions(
                 imeAction = Search,
                 keyboardType = KeyboardType.Uri
             ),
             keyboardActions = KeyboardActions(
                 onSearch = {
-                    onAction(urlTextLink)
-                    urlTextLink = ""
+                    submitAction()
                 }
-            )
+            ),
+            trailingIcon = {
+                AnimatedVisibility(visible = urlTextLink.isNotEmpty()) {
+                    IconButton(
+                        onClick = {
+                            urlTextLink = ""
+                            isValid = false
+                        }
+                    ) {
+                        Icon(Icons.Default.Clear, stringResource(R.string.clear_icon_text))
+                    }
+                }
+            },
+            isError = isValid,
+            supportingText = {
+                AnimatedVisibility(visible = isValid) {
+                    Text(
+                        text = stringResource(R.string.error_hint_message),
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            }
         )
         AnimatedVisibility(
             visible = !isLoading,
@@ -138,14 +172,12 @@ fun FavoriteForm(
             Button(
                 enabled = urlTextLink.isNotEmpty(),
                 onClick = {
-                    onAction(urlTextLink)
-                    urlTextLink = ""
+                    submitAction()
                 }
             ) {
                 Text(text = stringResource(R.string.add_favorite_text_button))
             }
         }
-
     }
 }
 
@@ -154,11 +186,15 @@ fun FavoriteItem(favorite: String, hasDivider: Boolean) {
     Column {
         Text(
             text = favorite,
-            fontSize = 14.sp,
+            fontSize = 15.sp,
             modifier = Modifier.padding(vertical = 8.dp)
         )
         if(hasDivider)
-            Divider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
+            Divider(
+                thickness = 0.5.dp,
+                modifier =Modifier.padding(top = 8.dp),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+            )
     }
 }
 
