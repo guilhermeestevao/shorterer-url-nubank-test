@@ -34,7 +34,7 @@ import test.example.takehome.ui.theme.TakeHomeTestTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -43,20 +43,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize(),
-                        topBar = {
-                            TopAppBar(
-                                title = {
-                                    Text(text = stringResource(R.string.app_title))
-                                },
-                                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
-                            )
-                        }
-                    ) { values ->
-                        val navController = rememberNavController()
-                        App(navController, values)
-                    }
+                    val navController = rememberNavController()
+                    App(navController)
                 }
             }
         }
@@ -65,10 +53,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun App(navController: NavHostController, values: PaddingValues) {
+fun App(navController: NavHostController) {
 
     NavHost(
-        modifier = Modifier.padding(values),
         navController = navController,
         startDestination = Routes.Home.path
     ) {

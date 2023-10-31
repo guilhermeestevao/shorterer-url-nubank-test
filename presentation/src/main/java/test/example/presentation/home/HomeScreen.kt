@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,8 +21,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -37,8 +41,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import test.example.presentation.R
+import test.example.presentation.common.AppBar
 import test.example.presentation.common.ErrorDialog
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomelViewModel,
@@ -57,27 +63,33 @@ fun HomeScreen(
         }
     }
 
-    Content(
-        favorites = favoriteList,
-        onClose = viewModel::cleanErrorMessage,
-        errorMessage = errorState
-    ) {
-        val isLoading =loadingState.value
-        FavoriteForm(isLoading, onSubmit)
-        Loading(isLoading)
-        FavoriteList(it)
+    AppBar(
+        title = stringResource(R.string.app_title)
+    ) { values ->
+        Content(
+            modifier = Modifier.padding(values),
+            favorites = favoriteList,
+            onClose = viewModel::cleanErrorMessage,
+            errorMessage = errorState
+        ) {
+            val isLoading =loadingState.value
+            FavoriteForm(isLoading, onSubmit)
+            Loading(isLoading)
+            FavoriteList(it)
+        }
     }
 }
 
 @Composable
 fun Content(
+    modifier: Modifier = Modifier,
     favorites: List<String>,
     errorMessage: State<String?>,
     onClose: () -> Unit,
     success: @Composable (List<String>) -> Unit,
 ) {
     Column(
-        modifier = Modifier.padding(16.dp)
+        modifier = modifier.padding(horizontal = 16.dp)
     ) {
         success(favorites)
         errorMessage.value?.let {

@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import test.example.domain.entity.Alias
+import test.example.presentation.common.AppBar
 import test.example.presentation.common.ErrorDialog
 import test.example.presentation.common.UiState
 
@@ -32,37 +33,41 @@ fun FavoriteScreen(
 
     val state by viewModel.uiState.collectAsState()
 
-    Content(
-        state = state,
-        onCloseErrorDialog = onBack
-    ) {
-        ElevatedCard(
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 6.dp
-            ),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            ),
-            modifier = Modifier.fillMaxWidth()
+    AppBar(title = id.toString(), onBackNavigation = onBack ) {
+        Content(
+            modifier = Modifier.padding(it),
+            state = state,
+            onCloseErrorDialog = onBack
         ) {
-            Text(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .wrapContentSize(Alignment.Center),
-                text = it.url)
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 6.dp
+                ),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .wrapContentSize(Alignment.Center),
+                    text = it.url)
+            }
         }
-
     }
+
 }
 
 @Composable
 fun Content(
+    modifier: Modifier = Modifier,
     state: UiState<Alias>,
     onCloseErrorDialog: () -> Unit,
     success: @Composable (Alias) -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(16.dp)
+        modifier = modifier.padding(16.dp)
     ) {
         when(state) {
             is UiState.Success -> success(state.data)

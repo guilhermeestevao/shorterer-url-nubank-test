@@ -4,4 +4,6 @@
   <string name="add_favorite_text_button">Add Favorite</string>
   <string name="error_hint_message">Enter a valid url or alias id</string>
   <string name="clear_icon_text">Clear</string>
+  <string name="app_title">Shortner Url App</string>
+  <string name="back_icon_content_description">Back</string>
 </resources>
