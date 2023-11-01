@@ -19,7 +19,7 @@ import test.example.presentation.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(title: String, onBackNavigation: (() -> Unit)? = null, content: @Composable (PaddingValues) -> Unit) {
+fun CommonScreen(title: String, onBackNavigation: (() -> Unit)? = null, content: @Composable (PaddingValues) -> Unit) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {

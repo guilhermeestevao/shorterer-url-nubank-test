@@ -17,9 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import test.example.domain.entity.Alias
-import test.example.presentation.common.AppBar
 import test.example.presentation.common.ErrorDialog
 import test.example.presentation.common.UiState
+import test.example.presentation.common.CommonScreen
 
 @Composable
 fun FavoriteScreen(
@@ -33,7 +33,7 @@ fun FavoriteScreen(
 
     val state by viewModel.uiState.collectAsState()
 
-    AppBar(title = id.toString(), onBackNavigation = onBack ) {
+    CommonScreen(title = id.toString(), onBackNavigation = onBack) {
         Content(
             modifier = Modifier.padding(it),
             state = state,
@@ -74,7 +74,6 @@ fun Content(
             is UiState.Loading -> {
                 CircularProgressIndicator()
             }
-
             is UiState.Error -> {
                 ErrorDialog(state.message, onCloseErrorDialog)
             }

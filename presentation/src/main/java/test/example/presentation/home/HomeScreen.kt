@@ -5,7 +5,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,11 +20,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -36,15 +32,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction.Companion.Search
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import test.example.presentation.R
-import test.example.presentation.common.AppBar
+import test.example.presentation.common.CommonScreen
 import test.example.presentation.common.ErrorDialog
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomelViewModel,
@@ -63,7 +62,7 @@ fun HomeScreen(
         }
     }
 
-    AppBar(
+    CommonScreen(
         title = stringResource(R.string.app_title)
     ) { values ->
         Content(
@@ -102,9 +101,7 @@ fun Content(
 fun FavoriteList(
     favorites: List<String>
 ) {
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-    ){
+    LazyColumn{
         itemsIndexed(favorites) { index, favorite  ->
            FavoriteItem(favorite, index < favorites.lastIndex)
         }
@@ -195,16 +192,23 @@ fun FavoriteForm(
 
 @Composable
 fun FavoriteItem(favorite: String, hasDivider: Boolean) {
+    val alias = favorite.substringAfterLast("/")
+    val baseUrl = favorite.substringBeforeLast("/")
     Column {
         Text(
-            text = favorite,
+            buildAnnotatedString {
+                append(baseUrl)
+                append("/")
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)) {
+                    append(alias)
+                }
+            },
             fontSize = 15.sp,
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier.padding(vertical = 12.dp)
         )
         if(hasDivider)
             Divider(
                 thickness = 0.5.dp,
-                modifier =Modifier.padding(top = 8.dp),
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
             )
     }
