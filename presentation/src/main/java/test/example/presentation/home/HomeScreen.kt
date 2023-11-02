@@ -31,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -134,7 +135,7 @@ fun FavoriteForm(
     ){
         TextField(
             value = urlTextLink,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().testTag(INPUT_TEXT_TAG),
             enabled = !isLoading,
             placeholder = {
                 Text(text = stringResource(R.string.hint_url_text_field))
@@ -158,7 +159,8 @@ fun FavoriteForm(
                         onClick = {
                             urlTextLink = ""
                             isValid = false
-                        }
+                        },
+                        modifier = Modifier.testTag(CLEAR_ICON_TAG)
                     ) {
                         Icon(Icons.Default.Clear, stringResource(R.string.clear_icon_text))
                     }
@@ -168,6 +170,7 @@ fun FavoriteForm(
             supportingText = {
                 AnimatedVisibility(visible = isValid) {
                     Text(
+                        modifier = Modifier.testTag(ERROR_MENSSAGE_TAG),
                         text = stringResource(R.string.error_hint_message),
                         color = MaterialTheme.colorScheme.error
                     )
@@ -179,6 +182,7 @@ fun FavoriteForm(
             modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
         ) {
             Button(
+                modifier = Modifier.testTag(ADD_BUTTON_TAG),
                 enabled = urlTextLink.isNotEmpty(),
                 onClick = {
                     submitAction()
@@ -226,3 +230,7 @@ fun Loading(visible: Boolean){
     }
 }
 
+const val INPUT_TEXT_TAG = "url_input_tag"
+const val ADD_BUTTON_TAG = "add_button_tag"
+const val CLEAR_ICON_TAG = "clear_url_input_tag"
+const val ERROR_MENSSAGE_TAG = "error_message_tag"

@@ -59,7 +59,6 @@ dependencies {
     testImplementation(TestDep.junit)
     testImplementation(TestDep.mockito)
     testImplementation(TestDep.coroutine)
-    androidTestImplementation(TestDep.junitExt)
-    androidTestImplementation(TestDep.expresso)
-
+    androidTestImplementation(TestDep.composeUiTest)
+    debugImplementation(TestDep.composeUiTestManifest)
 }
