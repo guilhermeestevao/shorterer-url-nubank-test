@@ -10,7 +10,7 @@ abstract class ResultConverter<T : Any, R : Any> {
                 UiState.Success(convertSuccess(result.data))
             }
             is Result.Error -> {
-                UiState.Error(result.exception.cause.localizedMessage.orEmpty())
+                UiState.Error(result.exception.localizedMessage.orEmpty())
             }
 
         }

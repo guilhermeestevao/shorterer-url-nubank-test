@@ -38,12 +38,12 @@ class RemoteShortenerDataSourceImplTest {
             short = short
         )
 
-        val alias = AliasModel(id, links)
-        val shortenUrl = ShortenUrl(id.toLong(), urls = Urls(url, short))
+        val aliasModel = AliasModel(id, links)
+        val expectedAlias = Alias(id.toLong(), links.short)
 
-        whenever(service.shortenUrl(any())).thenReturn(alias)
+        whenever(service.shortenUrl(any())).thenReturn(aliasModel)
         val result = source.shortenUrl(Favorite(url)).first()
-        assertEquals(shortenUrl, result)
+        assertEquals(expectedAlias, result)
 
     }
 
