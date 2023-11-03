@@ -20,6 +20,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
+
+        testOptions {
+            execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        }
     }
 
     buildTypes {
@@ -82,6 +87,7 @@ dependencies {
     implementation(Dep.navigationCompose)
     kapt(Dep.hiltCompiler)
     testImplementation(TestDep.junit)
+    testImplementation(TestDep.hilt)
     androidTestImplementation(TestDep.junitExt)
     androidTestImplementation(TestDep.expresso)
     androidTestImplementation(platform(Dep.composeBom))
@@ -89,5 +95,11 @@ dependencies {
     debugImplementation(TestDep.composeUiTooling)
     debugImplementation(TestDep.composeUiTestManifest)
     debugImplementation(TestDep.coroutine)
-
+    androidTestImplementation(TestDep.testCore)
+    androidTestImplementation(TestDep.testRunner)
+    androidTestImplementation(TestDep.testRules)
+    androidTestImplementation(TestDep.hilt)
+    kaptTest(TestDep.hiltCompiler)
+    androidTestUtil(TestDep.orchestrator)
+    kaptAndroidTest(TestDep.hiltCompiler)
 }

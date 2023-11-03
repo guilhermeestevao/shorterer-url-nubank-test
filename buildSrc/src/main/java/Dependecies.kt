@@ -9,7 +9,7 @@ object Config {
     val versionCode = 1
     val versionName = "1.0"
     val applicationId = "test.example.takehome"
-    val testRunner = "androidx.test.runner.AndroidJUnitRunner"
+    val testRunner = "test.example.takehome.ShortenerUrlAppTestRunner"
     val kotlinCompilerExtensionVersion = "1.4.3"
 }
 
@@ -48,6 +48,12 @@ object TestDep {
     val composeUiTooling = "androidx.compose.ui:ui-tooling"
     val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest"
     val mockito = "org.mockito.kotlin:mockito-kotlin:$mockitoVersion"
+    val testCore = "androidx.test:core:$androidTestCoreVersion"
+    val testRunner = "androidx.test:runner:$androidTestCoreVersion"
+    val testRules = "androidx.test:rules:$androidTestCoreVersion"
+    val orchestrator = "androidx.test:orchestrator:$androidTestOrchestratorVersion"
+    val hilt = "com.google.dagger:hilt-android-testing:$hiltVersion"
+    val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 }
 
 object Plugin {
@@ -76,5 +82,6 @@ private const val espressoVersion = "3.5.1"
 private const val roomVersion = "2.5.0"
 private const val navigationVerson = "2.5.3"
 private const val hiltNavigationComposeVersion = "1.0.0"
-private const val navigation = "2.7.4"
 private const val mockitoVersion =  "4.0.0"
+private const val androidTestCoreVersion = "1.4.0"
+private const val androidTestOrchestratorVersion = "1.4.1"
